@@ -1,0 +1,8 @@
+main: me.idarkyy.plugincore.PluginCoreManager
+
+name: PluginCoreLib
+version: undefined
+
+author: iDarkyy
+description: "Plugin core for all my plugins"
+

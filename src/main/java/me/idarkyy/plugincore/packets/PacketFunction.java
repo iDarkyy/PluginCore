@@ -1,29 +1,16 @@
 package me.idarkyy.plugincore.packets;
 
+import me.idarkyy.plugincore.nms.NmsClass;
 import org.bukkit.Bukkit;
 
-import java.util.HashMap;
+public abstract class PacketFunction {
+    private static final String SERVER_VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
-public class PacketFunction {
-    private static HashMap<String, Class<?>> cache = new HashMap<>();
-
-    public Class<?> getNmsClass(String name) {
-        String key = "net.minecraft.server." + getServerVersion() + "." + name;
-
-        if(cache.containsKey(key)) {
-            return cache.get(key);
-        }
-
-        try {
-            return cache.put(key, Class.forName(key));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    public NmsClass getNmsClass(String name) {
+        return NmsClass.getNmsClass(name);
     }
 
     public String getServerVersion() {
-        return Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        return SERVER_VERSION;
     }
 }

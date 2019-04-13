@@ -14,8 +14,8 @@ public class ActionBar extends PacketFunction {
 
     public ActionBar() {
         try {
-            constructor = getNmsClass("PacketPlayOutChat").getConstructor(getNmsClass("IChatBaseComponent"), byte.class);
-            method = getNmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class);
+            constructor = getNmsClass("PacketPlayOutChat").getConstructor(getNmsClass("IChatBaseComponent").getRawClass(), byte.class);
+            method = getNmsClass("IChatBaseComponent").getRawClass().getDeclaredClasses()[0].getMethod("a", String.class);
         } catch(NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -23,6 +23,7 @@ public class ActionBar extends PacketFunction {
 
     public void send(String message, Player player) {
         if(!getServerVersion().contains("1_8") && !getServerVersion().contains("1_7")) {
+
         }
 
         try {
@@ -31,7 +32,7 @@ public class ActionBar extends PacketFunction {
             Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
             Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
 
-            playerConnection.getClass().getMethod("sendPacket", getNmsClass("Packet")).invoke(playerConnection, packet);
+            playerConnection.getClass().getMethod("sendPacket", getNmsClass("Packet").getRawClass()).invoke(playerConnection, packet);
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -13,7 +13,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -31,6 +30,13 @@ public class CommandManager {
         this.plugin = plugin;
     }
 
+    /**
+     * Registers a command
+     *
+     * @param name
+     * @param command
+     * @param aliases
+     */
     public void register(String name, Command command, String... aliases) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(command);
@@ -72,7 +78,7 @@ public class CommandManager {
                         }
 
                         // Creates a new event object, which will be used to get the sender and arguments
-                        SubcommandEvent event = new SubcommandEvent(CommandManager.this, sender, Arrays.copyOfRange(args, 1, args.length - 1));
+                        SubcommandEvent event = new SubcommandEvent(CommandManager.this, sender, Arrays.copyOfRange(args, 1, args.length - 1))      ;
 
                         // Attempt to invoke the method
                         try {
@@ -81,7 +87,7 @@ public class CommandManager {
                         } catch(Exception e) {
                             // Throws a CommandException with the thrown exception as a cause
                             throw new CommandException(
-                                            "An error occurred whilst executing command " + name + "'s subcommand '" + args[0] + "' from plugin " + plugin.getName() + " " + plugin.getDescription().getVersion()
+                                    "An error occurred whilst executing command " + name + "'s subcommand '" + args[0] + "' from plugin " + plugin.getName() + " " + plugin.getDescription().getVersion()
                                     , e);
                         }
                     }
@@ -148,12 +154,12 @@ public class CommandManager {
 
     private boolean hasAtleastOnePermission(CommandSender sender, List<String> permissions) {
         if(permissions.isEmpty()) {
-            return true;
+            return true; // if there's no permissions, returns true
         }
 
-        for (String permission : permissions) {
+        for (String permission : permissions) { // loops through the permissions
             if (sender.hasPermission(permission)) {
-                return true;
+                return true; // if the sender has at least one permission, returns true
             }
         }
 
