@@ -33,9 +33,12 @@ public class CommandManager {
     /**
      * Registers a command
      *
-     * @param name
-     * @param command
-     * @param aliases
+     * Registers a command into the bukkit command map and
+     * allows it's registration registering them in without plugin.yml
+     *
+     * @param name The command name
+     * @param command The command object
+     * @param aliases Aliases for the command (optional)
      */
     public void register(String name, Command command, String... aliases) {
         Objects.requireNonNull(name);
