@@ -13,10 +13,11 @@ import java.util.List;
  * Simple logging to files & console for Bukkit plugins
  */
 public class PluginLogger {
-    public static final String LINE_SEPARATOR = System.lineSeparator();
-    public static final SimpleDateFormat DEFAULT_FILENAME_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final SimpleDateFormat DEFAULT_FILENAME_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private static final String STRING_FORMAT = "%time% %level% [%plugin%] %message%";
+
     private Plugin plugin;
     private PrintStream output = System.out;
     private SimpleDateFormat dateFormat = DEFAULT_DATE_FORMAT;
